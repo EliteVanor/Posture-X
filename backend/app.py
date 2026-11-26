@@ -10,62 +10,9 @@ import posture
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
-users = {
-    1: {
-        "username": "joebiden82",
-        "email": "mister46@gmail.com", 
-        "gender": "male", 
-        "country": "United States", 
-        "active": True,
-        # "headTiltAngle": 10.28,
-        # "headY": 0.0254,
-        # "shoulderTilt": 0.1162
-    },
-    2: {
-        "username": "markcarney60",
-        "email": "bankofenglandgov@hotmail.com", 
-        "gender": "male", 
-        "country": "United Kingdom",
-        "active": False,
-        # "headTiltAngle": 9.57,
-        # "headY": 0.0302,
-        # "shoulderTilt": 0.0998
-    },
-    3: {
-        "username": "claudia.sheinbaum",
-        "email": "c.sheinbaum@gmail.com", 
-        "gender": "female", 
-        "country": "Mexico", 
-        "active": True,
-        # "headTiltAngle": 10.59,
-        # "headY": 0.0232,
-        # "shoulderTilt": 0.1076
-    }
-}
-
-days = {
-    "2025-03-22_1": {
-        "good-posture-time": 5600,
-        "front-slouch-time": 540,
-        "shoulder-tilt-time": 330,
-        "back-slouch-time": 783,
-        "face-close-time": 970
-    },
-    "2024-10-30_3": {
-        "good-posture-time": 7934,
-        "front-slouch-time": 2340,
-        "shoulder-tilt-time": 219,
-        "back-slouch-time": 1290,
-        "face-close-time": 768
-    },
-    "2024-10-31_3": {
-        "good-posture-time": 3456,
-        "front-slouch-time": 984,
-        "shoulder-tilt-time": 56,
-        "back-slouch-time": 230,
-        "face-close-time": 138
-    }
-}
+# In-memory stores. Data resets when the server restarts (a database is planned for v2).
+users = {}
+days = {}
 
 @app.route("/create_user", methods = ["POST"])
 def create_user():
