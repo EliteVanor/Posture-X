@@ -14,7 +14,8 @@
 ## Git conventions
 - One branch per version round, named `v_<version>_<short-description>`, for example `v_1_readme-live-demo`, `v_2_backend-fixes`. v0 is the original hackathon code.
 - Branch from `main`. Merge into `main` to deploy the demo.
-- Commits are authored as Khoi Bui.
+- Commits are authored as `Khoi Bui <98100649+EliteVanor@users.noreply.github.com>` (links to the EliteVanor GitHub profile and keeps the personal email private).
+- Cloud sessions set `GIT_AUTHOR_*` and `GIT_COMMITTER_*` environment variables, which override the repo's git config. Export the name and email above in those variables before committing, then check with `git log --format='%an <%ae>'`.
 
 ## When compacting
 Keep the list of modified files, the test commands and open decisions.
