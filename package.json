@@ -1,0 +1,10 @@
+{
+  "name": "posturex",
+  "private": true,
+  "type": "module",
+  "description": "Real-time posture monitoring in the browser with MediaPipe.",
+  "scripts": {
+    "test": "node --test",
+    "start": "python3 -m http.server 8000"
+  }
+}
