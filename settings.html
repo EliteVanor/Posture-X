@@ -3,30 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posture Tracker - Settings</title>
+    <title>PostureX Settings</title>
     <link rel="stylesheet" href="video.css">
+    <link rel="stylesheet" href="css/monitor.css">
 </head>
 <body>
-    <div class="sidebar">
+    <nav class="sidebar" aria-label="Main">
         <h2>PostureX</h2>
         <ul>
             <li><a href="index.html">🏠 Dashboard</a></li>
             <li><a href="setup.html">📷 Setup Camera</a></li>
-            <li><a href="settings.html">⚙️ Settings</a></li>
+            <li><a href="settings.html" aria-current="page">⚙️ Settings</a></li>
         </ul>
-    </div>
-    
-    <div class="main-content">
-        <h2>Settings</h2>
-        <label for="notification">Enable Notifications</label>
-        <input type="checkbox" id="notification">
-        
-        <label for="theme">Dark Mode</label>
-        <input type="checkbox" id="theme">
-        
-        <button class="save-settings">Save Changes</button>
-    </div>
+    </nav>
 
-    <script src="script.js"></script>
+    <main class="main-content">
+        <h1>Settings</h1>
+
+        <section class="card">
+            <h2>Alerts</h2>
+            <div class="form-row">
+                <input type="checkbox" id="notification">
+                <label for="notification">Send a browser notification when bad posture lasts while PostureX is in a background tab</label>
+            </div>
+            <p id="notification-state" class="muted"></p>
+        </section>
+
+        <section class="card">
+            <h2>Your data</h2>
+            <p>Posture stats are stored only in this browser. Nothing is uploaded.</p>
+            <div class="button-group">
+                <button id="clear-data" class="btn">Delete my posture history</button>
+            </div>
+            <p id="clear-state" class="muted" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <script type="module">
+        import { loadSettings, saveSettings, clearDays } from "./js/storage.js";
+
+        const box = document.getElementById("notification");
+        const state = document.getElementById("notification-state");
+
+        function describePermission() {
+            if (!("Notification" in window)) return "This browser does not support notifications.";
+            if (Notification.permission === "denied") return "Notifications are blocked for this site in your browser settings.";
+            if (Notification.permission === "default") return "Your browser will ask for permission when you start monitoring.";
+            return "";
+        }
+
+        box.checked = loadSettings().notifications;
+        state.textContent = describePermission();
+        box.addEventListener("change", () => saveSettings({ ...loadSettings(), notifications: box.checked }));
+
+        document.getElementById("clear-data").addEventListener("click", () => {
+            if (!confirm("Delete all saved posture stats from this browser?")) return;
+            clearDays();
+            document.getElementById("clear-state").textContent = "History deleted.";
+        });
+    </script>
 </body>
 </html>

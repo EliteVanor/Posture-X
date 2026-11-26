@@ -3,36 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tips</title>
+    <title>PostureX Setup: Tips</title>
     <link rel="stylesheet" href="../video.css">
+    <link rel="stylesheet" href="../css/monitor.css">
 </head>
 <body>
-    <div class="sidebar">
+    <nav class="sidebar" aria-label="Main">
         <h2>PostureX</h2>
         <ul>
-            <li><a href="..\index.html">🏠 Dashboard</a></li>
-            <li><a href="..\setup.html">📷 Setup Camera</a></li>
-            <li><a href="..\settings.html">⚙️ Settings</a></li>
+            <li><a href="../index.html">🏠 Dashboard</a></li>
+            <li><a href="../setup.html">📷 Setup Camera</a></li>
+            <li><a href="../settings.html">⚙️ Settings</a></li>
         </ul>
-    </div>
+    </nav>
 
-    <div class="main-content">
-        <nav class="top-nav">
+    <main class="main-content">
+        <nav class="top-nav" aria-label="Setup steps">
             <a href="../setup.html">Setup Intro</a>
-            <a href="how_to_sit.html">How to Sit</a>
-            <a href="tips.html" class="active">Tips</a>
-            <a href="good_posture.html">Good Posture</a>
-            <a href="bad_posture.html">Bad Posture</a>
-            <a href="all_set.html">All Set</a>
+            <a href="../setup/how_to_sit.html">How to Sit</a>
+            <a href="../setup/tips.html" class="active" aria-current="page">Tips</a>
+            <a href="../setup/good_posture.html">Good Posture</a>
+            <a href="../setup/bad_posture.html">Bad Posture</a>
+            <a href="../setup/all_set.html">All Set</a>
         </nav>
 
         <h1>Tips</h1>
         <p>For best results:</p>
         <p>Don't move your computer or adjust the screen angle during the setup process.</p>
         <p>You can come back any time to redo these setup steps if your slouches are not being detected correctly.</p>
+
         <div class="button-group">
-            <button onclick="window.location.href='good_posture.html'">Next ➡</button>
+            <button class="btn" onclick="window.location.href='good_posture.html'">Next ➡</button>
         </div>
-    </div>
+    </main>
 </body>
 </html>

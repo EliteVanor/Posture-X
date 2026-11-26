@@ -3,67 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posture Tracking Dashboard</title>
+    <title>PostureX Dashboard</title>
+    <meta name="description" content="Real-time posture monitoring in the browser with MediaPipe. Video never leaves your device.">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="css/monitor.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
 </head>
 <body>
-    <div class="sidebar">
+    <nav class="sidebar" aria-label="Main">
         <h2>PostureX</h2>
         <ul>
-            <li><a href="index.html">🏠 Home</a></li>
+            <li><a href="index.html" aria-current="page">🏠 Dashboard</a></li>
             <li><a href="setup.html">📷 Setup Camera</a></li>
             <li><a href="settings.html">⚙️ Settings</a></li>
-            <li><a href="login.html">Login</a></li>
+            <li><a href="login.html">👤 Account</a></li>
         </ul>
-    </div>
-    
-    <div class="main-content">
-        <h1>My Dashboard</h1>
-        
-        <div class="progress-section">
-            <h2>Total Progress</h2>
-            <canvas id="progressChart"></canvas>
-        </div>
-        
-        <div class="daily-progress">
-            <h2>Daily Progress</h2>
-            <p><span class="good">76% Good Posture</span> on March 22</p>
-            <p><span class="moderate">52% Good Posture</span> on March 21</p>
-            <p><span class="bad">38% Good Posture</span> on March 20</p>
-        </div>
+    </nav>
 
-        <div class="weekly-progress">
-            <h2>Progress This Week</h2>
-            <canvas id="weeklyChart"></canvas>
+    <main class="main-content">
+        <h1>My Dashboard</h1>
+
+        <section class="card monitor-card" aria-labelledby="monitor-title">
+            <div class="card-head">
+                <h2 id="monitor-title">Live Monitor</h2>
+                <span id="status" class="status-pill status-idle" role="status">Not running</span>
+            </div>
+
+            <div class="video-wrap">
+                <video id="camera-feed" playsinline muted></video>
+                <canvas id="overlay" aria-hidden="true"></canvas>
+                <div id="video-placeholder" class="video-placeholder">
+                    <p>Press <strong>Start Monitoring</strong> and sit up straight for 2 seconds while PostureX calibrates.</p>
+                    <p class="muted">Detection runs in your browser. Video never leaves your device.</p>
+                </div>
+                <div id="calibration-bar" class="calibration-bar" hidden><span></span></div>
+            </div>
+
+            <div class="button-group">
+                <button id="startMonitoring" class="btn btn-primary">▶ Start Monitoring</button>
+                <button id="stopMonitoring" class="btn" disabled>⏹ Stop</button>
+                <button id="recalibrate" class="btn" disabled>↺ Recalibrate</button>
+            </div>
+
+            <ul id="issues" class="issue-list" aria-live="polite"></ul>
+            <p id="session-info" class="muted"></p>
+        </section>
+
+        <div class="card-grid">
+            <section class="card" aria-labelledby="today-title">
+                <h2 id="today-title">Today</h2>
+                <p class="big-number"><span id="today-percent">–</span><span class="unit">good posture</span></p>
+                <dl id="today-breakdown" class="breakdown"></dl>
+            </section>
+
+            <section class="card" aria-labelledby="week-title">
+                <h2 id="week-title">Last 7 Days</h2>
+                <canvas id="weeklyChart" height="180" role="img" aria-label="Good posture percentage for each of the last 7 days"></canvas>
+            </section>
         </div>
-    </div>
-    
-    <div class="right-panel">
-        <h2>Cesar</h2>
-        <div class="button-group">
-            <button id="startRecording" class="start-recording">▶ Start Monitoring</button>
-            <button id="stopRecording" class="start-recording">⏹ Stop Monitoring</button>
-        </div>
-        
-        <canvas id="canvas" style="display: none;"></canvas>
-   
-        <div class="challenge-section">
-            <h3>This Week’s Challenge:</h3>
-            <p>✔ 80% Good Posture in 10 mins</p>
-            <p>✔ 60% Good Posture in 30 mins</p>
-            <p>✔ 50% Good Posture overall</p>
-        </div>
-        
-        <div class="rank-section">
-            <h3>Rank: <span class="moderate">Newbie PostureX</span></h3>
-            <p>76 out of 100 minutes</p>
-            <canvas id="rankChart"></canvas>
-        </div>
-        <canvas id="canvas"></canvas>
-        <video id="camera-feed" autoplay></video>
-    </div>
-    
-    <script src="script.js"></script>
+    </main>
+
+    <script type="module" src="js/dashboard.js"></script>
 </body>
 </html>

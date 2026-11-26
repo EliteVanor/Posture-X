@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PostureX - Login</title>
+    <title>PostureX Login</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/monitor.css">
 </head>
 <body class="auth-container">
-    <div class="auth-box">
+    <main class="auth-box">
         <h2>Login</h2>
-        <form onsubmit="redirectToIndex(event)">
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
+        <p class="notice">Accounts are a work in progress. You don't need one: the <a href="index.html">dashboard</a> works without logging in.</p>
+        <form id="loginForm">
+            <input type="email" id="email" placeholder="Email" aria-label="Email" autocomplete="email" required>
+            <input type="password" id="password" placeholder="Password" aria-label="Password" autocomplete="current-password" required>
             <button type="submit">Login</button>
         </form>
         <p>Don't have an account? <a href="register.html">Register here</a></p>
-    </div>
+    </main>
 
-    <script src="script.js"></script>
+    <script type="module" src="js/auth.js"></script>
 </body>
 </html>

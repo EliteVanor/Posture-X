@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PostureX - Setup</title>
+    <title>PostureX Setup: Intro</title>
     <link rel="stylesheet" href="video.css">
+    <link rel="stylesheet" href="css/monitor.css">
 </head>
 <body>
-    <div class="sidebar">
+    <nav class="sidebar" aria-label="Main">
         <h2>PostureX</h2>
         <ul>
             <li><a href="index.html">🏠 Dashboard</a></li>
-            <li><a href="setup.html" class="active">📷 Setup Camera</a></li>
+            <li><a href="setup.html" aria-current="page">📷 Setup Camera</a></li>
             <li><a href="settings.html">⚙️ Settings</a></li>
         </ul>
-    </div>
+    </nav>
 
-    <div class="main-content">
-        <nav class="top-nav">
-            <a href="setup.html" class="active">Setup Intro</a>
-            <a href="setup\how_to_sit.html">How to Sit</a>
-            <a href="setup\tips.html">Tips</a>
-            <a href="setup\good_posture.html">Good Posture</a>
-            <a href="setup\bad_posture.html">Bad Posture</a>
-            <a href="setup\all_set.html">All Set</a>
+    <main class="main-content" data-setup-mode="preview">
+        <nav class="top-nav" aria-label="Setup steps">
+            <a href="setup.html" class="active" aria-current="page">Setup Intro</a>
+            <a href="setup/how_to_sit.html">How to Sit</a>
+            <a href="setup/tips.html">Tips</a>
+            <a href="setup/good_posture.html">Good Posture</a>
+            <a href="setup/bad_posture.html">Bad Posture</a>
+            <a href="setup/all_set.html">All Set</a>
         </nav>
 
         <h1>Meet PostureX!</h1>
         <p>PostureX is an assistant to fix your posture.</p>
         <p>It will recognize when your posture is good or when you slouch.</p>
-        <p>If you slouch, a droid will remind you to sit up.</p>
+        <p>Start the camera to check that your head and shoulders are in view. Detection runs in your browser, and video never leaves your device.</p>
+
+        <div class="video-wrap">
+            <video id="camera-feed" playsinline muted></video>
+            <canvas id="overlay" aria-hidden="true"></canvas>
+            <div id="video-placeholder" class="video-placeholder"><p>Start the camera to check your framing.</p></div>
+            
+        </div>
+        <p><span id="status" class="status-pill status-idle" role="status">Not running</span></p>
+        <p id="setup-info" class="muted" aria-live="polite"></p>
+        <ul id="issues" class="issue-list" aria-live="polite"></ul>
 
         <div class="button-group">
-            <button id="startRecording">🎥 Start Recording</button>
-            <button id="stopRecording">⏹ Stop Recording</button>
-            <button onclick="nextStep()">Continue ➡</button>
+            <button id="startRecording" class="btn btn-primary">🎥 Start Camera</button>
+            <button id="stopRecording" class="btn" disabled>⏹ Stop</button>
+            <button class="btn" onclick="window.location.href='setup/how_to_sit.html'">Continue ➡</button>
         </div>
-        
-        <canvas id="canvas" style="display: none;"></canvas>
-        <video id="camera-feed" autoplay></video>
-    </div>
-
-    <script src="script.js"></script>
+    </main>
+    <script type="module" src="js/setup.js"></script>
 </body>
 </html>
